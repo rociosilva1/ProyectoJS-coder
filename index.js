@@ -96,22 +96,41 @@ const shoppingCart = {
 // Cargar carrito desde el local storage
 shoppingCart.loadFromLocalStorage();
   
-// prompt de compra realizada 
+// Evento para Comprar
 comprarBtn.addEventListener("click", () => {
     const productosComprados = shoppingCart.items.map(item => {
-      let precioTexto = `${item.name} - Precio: $${item.price.toFixed(2)}`;
+        let precioTexto = `${item.name} - Precio: $${item.price.toFixed(2)}`;
         if (item.discount > 0) {
             const precioConDescuento = item.price * (1 - item.discount);
             precioTexto += ` (Descuento ${item.discount * 100}%): $${precioConDescuento.toFixed(2)}`;
         }
         return precioTexto;
-    }).join('\n');
-  
+    });
+
     const totalCompra = shoppingCart.calculateTotal().toFixed(2);
-    alert(`Compra realizada por un total de $${totalCompra}.\n\nProductos comprados:\n${productosComprados}\n\nGracias por su compra, ${nombre}`);
-    shoppingCart.items = [];
-    shoppingCart.render();
-    shoppingCart.saveToLocalStorage();
+
+    // Construir los detalles de la compra en una cadena de texto
+    const detallesCompra = `<ul>
+            ${productosComprados.map(producto => `<li>${producto}</li>`).join('')}
+        </ul>
+        <div id="totalCompra">Total de la compra: $${totalCompra}</div>
+        <div id="graciasPorCompra">Gracias por su compra, ${nombre}</div>
+    `;
+
+    // Mostrar los detalles de la compra en el contenedor oculto
+    const compraFinal = document.getElementById("compraFinal");
+    compraFinal.innerHTML = detallesCompra;
+
+    // Mostrar la capa de superposición
+    const detalleCompra = document.getElementById("detalleCompra");
+    detalleCompra.style.display = "block";
+});
+
+// Evento para cerrar la capa de superposición
+  const cerrarDetalleCompra = document.getElementById("cerrarDetalleCompra");
+  cerrarDetalleCompra.addEventListener("click", () => {
+    const detalleCompra = document.getElementById("detalleCompra");
+    detalleCompra.style.display = "none";
 });
   
   
