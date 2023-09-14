@@ -111,7 +111,7 @@ comprarBtn.addEventListener("click", () => {
 
     // Construir los detalles de la compra en una cadena de texto
     const detallesCompra = `<ul>
-            ${productosComprados.map(producto => `<li>${producto}</li>`).join('')}
+            ${productosComprados.map(producto => `<li id="listadoProductosComprados">${producto}</li>`).join('')}
         </ul>
         <div id="totalCompra">Total de la compra: $${totalCompra}</div>
         <div id="graciasPorCompra">Gracias por su compra, ${nombre}</div>

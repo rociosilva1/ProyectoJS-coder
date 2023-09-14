@@ -140,6 +140,11 @@ ul {
   margin-bottom: 10px;
 }
 
+#listadoProductosComprados {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 /* Estilos para el botón de cerrar */
 .cerrarDetalleCompra {
   position: absolute;
